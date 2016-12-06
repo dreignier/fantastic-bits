@@ -631,7 +631,7 @@ public:
         f = 0.0;
     }
 
-    virtual void move() {}
+    virtual void move(double t) {}
 
     virtual void save() {}
 
