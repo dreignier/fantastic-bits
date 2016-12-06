@@ -1,0 +1,169 @@
+@startuml
+Point <|-- Unit
+Unit <|-- Wizard
+Unit <|-- Snaffle
+Unit <|-- Pole
+Unit <|-- Bludger
+Spell <|-- Obliviate
+Spell <|-- Petrificus
+Spell <|-- Accio
+Spell <|-- Flipendo
+
+Collision "0..n" -- "1..2" Unit
+Spell "1" -- "1" Wizard : caster
+Spell "0..n" - "1" Unit : target
+Wizard "1" -- "1" Snaffle : carrier
+Bludger "1" -- "1" Wizard : last
+
+class Solution {
+double energy
+int moves1[DEPTH]
+int moves2[DEPTH]
+
+int spellTurn1
+Unit* spellTarget1
+int spell1
+
+int spellTurn2
+Unit* spellTarget2
+int spell2
+
+Solution* merge(Solution* solution)
+void copy(Solution* solution)
+void mutate()
+void randomize()
+}
+
+class Point {
+double x
+double y
+}
+
+class Collision {
+double t
+int dir
+
+Collision* update(double t, Unit* a, int dir)
+Collision* update(double t, Unit* a, Unit* b)
+}
+
+class Spell {
+int duration
+int type
+
+void cast(Unit* target)
+void apply()
+void save()
+void reset()
+void reloadTarget()
+void effect()
+void print()
+}
+
+class Obliviate {
+void print()
+void effect()
+}
+
+class Petrificus {
+void print()
+void effect()
+}
+
+class Accio {
+void print()
+void effect()
+}
+
+class Flipendo {
+void print()
+void effect()
+}
+
+class Unit {
+int id
+int type
+int state
+bool dead
+double r
+double m
+double f
+double vx
+double vy
+double sx
+double sy
+double svx
+double svy
+int grab = 0
+
+void update(int id, int x, int y, int vx, int vy, int state)
+double speedTo(Point* p)
+double speed()
+void thrust(double thrust, Point* p, double distance)
+void thrust(double thrust, double x, double y, double distance)
+void move(double t)
+Collision* collision(double from)
+Collision* collision(Unit* u, double from)
+void bounce(Unit* u)
+void bounce(int dir)
+void end()
+bool can(Unit* u)
+void print()
+void save()
+void reset()
+}
+
+class Pole {
+void move()
+void save()
+void reset()
+Collision* collision(double from)
+}
+
+class Wizard {
+int team
+Spell* spells[4]
+int spell
+Unit* spellTarget
+
+void grabSnaffle(Snaffle* snaffle)
+void apply(int move)
+void output(int move, int spellTurn, int spell, Unit* target)
+void cast(int spell, Unit* target)
+Collision* collision(Unit* u, double from)
+void bounce(Unit* u)
+void play()
+void end()
+void save()
+void reset()
+void print()
+void updateSnaffle()
+void apply(Solution* solution, int turn, int index)
+}
+
+class Snaffle {
+bool danger;
+
+Collision* collision(double from)
+Collision* collision(Unit* u, double from)
+void bounce(Unit* u)
+void bounce(int dir)
+void move(double t)
+void end()
+void save()
+void reset()
+void print()
+}
+
+class Bludger {
+int ignore[2];
+
+void print()
+void save()
+void reset()
+void bounce(Unit* u)
+void play()
+}
+
+@enduml
+
