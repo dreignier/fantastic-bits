@@ -65,7 +65,6 @@ constexpr double MUTATION = 2;
 
 double cosAngles[ANGLES_LENGTH];
 double sinAngles[ANGLES_LENGTH];
-double patiences[DEPTH];
 
 int myTeam;
 int mana = 0;
@@ -1658,10 +1657,6 @@ int main() {
     fake = new Collision();
     fake->t = 1000.0;
 
-    for (int i = 0; i < DEPTH; ++i) {
-        patiences[i] = pow(COEF_PATIENCE, i);
-    }
-
     for (int i = 0; i < ANGLES_LENGTH; ++i) {
         cosAngles[i] = cos(ANGLES[i] * TO_RAD);
         sinAngles[i] = sin(ANGLES[i] * TO_RAD);
@@ -1874,7 +1869,6 @@ int main() {
 
         #ifndef PROD
         cerr << "hisScore : " << hisScore << endl;
-        cerr << "snaffleCount : " << snaffleCount << endl;
         cerr << "victory : " << victory << endl;
         #endif
 
