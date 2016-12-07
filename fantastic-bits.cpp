@@ -786,7 +786,7 @@ class Snaffle : public Unit {
 public:
     Wizard* scarrier;
 
-    bool danger = false;
+
 
     Snaffle() {
         this->r = 150.0;
@@ -2030,7 +2030,7 @@ int main() {
 
                 do {
                     bIndex = fastRandInt(POOL);
-                } while (bIndex == aIndex && bIndex != firstIndex);
+                } while (bIndex == aIndex || bIndex == firstIndex);
 
                 int secondIndex = pool[aIndex]->energy > pool[bIndex]->energy ? aIndex : bIndex;
 
